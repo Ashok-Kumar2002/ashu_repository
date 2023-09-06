@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+{% load blog_tags  %}
+{% load static %}
+
+<html lang="en" dir="ltr">
+<head>
+	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static "css/blogapp/blog.css" %}">
+
+     <title>
+     	{% block title_block %}
+
+     	{% endblock title_block %}
+     </title>
+	
+</head>
+<body>
+
+	<div class="content">
+		{% block content_block %}
+
+
+
+		{% endblock content_block %}
+	</div>
+
+	<div class="sidebar">
+		<h2>AK BLOGS</h2>
+		<p id="num">The Total Number of Blogs: <span id="pcount">{% my_tag %}</span></p>
+		<h3 id='second'>Latest Blog/Posts </h3>{% show_latest_posts %}
+
+		<h3 id='multi'>Most commented Posts</h3>
+		{% get_most_commented_posts as m_c_p%}
+		<ul>
+			{% for post in m_c_p %}
+			
+			<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+				
+			{% endfor %}
+		</ul>
+		
+	</div>
+		
+
+</body>
+</html>
